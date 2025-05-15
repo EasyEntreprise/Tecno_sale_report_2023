@@ -248,8 +248,10 @@ if file is not None :
 
     with cold:
         # Graphic en 'Bar' (Situation inactive par regions)
+        
         shop_models = dataset_drc_shop.groupby("Modeles", as_index = False)["Vente(Pcs)"].sum()
-        fig_shop_modele = go.Figure(data=[go.Pie(labels= liste, values= shop_models["Vente(Pcs)"], title=f"Proportion of sell for shop {shop_select} by models", opacity= 0.8)])
+        liste_models = shop_models["Modeles"].unique()
+        fig_shop_modele = go.Figure(data=[go.Pie(labels= liste_models, values= shop_models["Vente(Pcs)"], title=f"Proportion of sell for shop {shop_select} by models", opacity= 0.8)])
         fig_shop_modele.update_traces(hoverinfo = 'label+percent', textfont_size = 15, textinfo = "label+percent",marker_line=dict(color='#FFFFFF', width=1))
         st.plotly_chart(fig_shop_modele)
         
